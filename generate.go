@@ -530,28 +530,8 @@ func getDefaultTemplate() (specs.LinuxSpec, specs.LinuxRuntimeSpec) {
 			Hostname: "shell",
 			Mounts: []specs.MountPoint{
 				{
-					Name: "proc",
-					Path: "/proc",
-				},
-				{
-					Name: "dev",
-					Path: "/dev",
-				},
-				{
-					Name: "devpts",
-					Path: "/dev/pts",
-				},
-				{
-					Name: "shm",
-					Path: "/dev/shm",
-				},
-				{
 					Name: "mqueue",
 					Path: "/dev/mqueue",
-				},
-				{
-					Name: "sysfs",
-					Path: "/sys",
 				},
 			},
 		},
@@ -577,34 +557,9 @@ func getDefaultTemplate() (specs.LinuxSpec, specs.LinuxRuntimeSpec) {
 	rspec := specs.LinuxRuntimeSpec{
 		RuntimeSpec: specs.RuntimeSpec{
 			Mounts: map[string]specs.Mount{
-				"proc": {
-					Type:    "proc",
-					Source:  "proc",
-					Options: nil,
-				},
-				"dev": {
-					Type:    "tmpfs",
-					Source:  "tmpfs",
-					Options: []string{"nosuid", "strictatime", "mode=755", "size=65536k"},
-				},
-				"devpts": {
-					Type:    "devpts",
-					Source:  "devpts",
-					Options: []string{"nosuid", "noexec", "newinstance", "ptmxmode=0666", "mode=0620", "gid=5"},
-				},
-				"shm": {
-					Type:    "tmpfs",
-					Source:  "shm",
-					Options: []string{"nosuid", "noexec", "nodev", "mode=1777", "size=65536k"},
-				},
 				"mqueue": {
 					Type:    "mqueue",
 					Source:  "mqueue",
-					Options: []string{"nosuid", "noexec", "nodev"},
-				},
-				"sysfs": {
-					Type:    "sysfs",
-					Source:  "sysfs",
 					Options: []string{"nosuid", "noexec", "nodev"},
 				},
 			},
@@ -634,68 +589,7 @@ func getDefaultTemplate() (specs.LinuxSpec, specs.LinuxRuntimeSpec) {
 					Soft: uint64(1024),
 				},
 			},
-			Devices: []specs.Device{
-				{
-					Type:        'c',
-					Path:        "/dev/null",
-					Major:       1,
-					Minor:       3,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-				{
-					Type:        'c',
-					Path:        "/dev/random",
-					Major:       1,
-					Minor:       8,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-				{
-					Type:        'c',
-					Path:        "/dev/full",
-					Major:       1,
-					Minor:       7,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-				{
-					Type:        'c',
-					Path:        "/dev/tty",
-					Major:       5,
-					Minor:       0,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-				{
-					Type:        'c',
-					Path:        "/dev/zero",
-					Major:       1,
-					Minor:       5,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-				{
-					Type:        'c',
-					Path:        "/dev/urandom",
-					Major:       1,
-					Minor:       9,
-					Permissions: "rwm",
-					FileMode:    0666,
-					UID:         0,
-					GID:         0,
-				},
-			},
+			Devices: []specs.Device{},
 			Resources: &specs.Resources{
 				Memory: specs.Memory{
 					Swappiness: -1,

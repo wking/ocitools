@@ -528,12 +528,7 @@ func getDefaultTemplate() (specs.LinuxSpec, specs.LinuxRuntimeSpec) {
 				},
 			},
 			Hostname: "shell",
-			Mounts: []specs.MountPoint{
-				{
-					Name: "mqueue",
-					Path: "/dev/mqueue",
-				},
-			},
+			Mounts: []specs.MountPoint{},
 		},
 		Linux: specs.Linux{
 			Capabilities: []string{
@@ -556,13 +551,7 @@ func getDefaultTemplate() (specs.LinuxSpec, specs.LinuxRuntimeSpec) {
 	}
 	rspec := specs.LinuxRuntimeSpec{
 		RuntimeSpec: specs.RuntimeSpec{
-			Mounts: map[string]specs.Mount{
-				"mqueue": {
-					Type:    "mqueue",
-					Source:  "mqueue",
-					Options: []string{"nosuid", "noexec", "nodev"},
-				},
-			},
+			Mounts: map[string]specs.Mount{},
 		},
 		Linux: specs.LinuxRuntime{
 			Namespaces: []specs.Namespace{
